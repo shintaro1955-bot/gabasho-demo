@@ -1130,6 +1130,7 @@ var NAV = {
     {v:'league', ic:'trophy', t:'リーグ・ランキング'},
     {v:'ai', ic:'message', t:'コーチからの応援'},
     {v:'vision', ic:'target', t:'なりたい姿・軸'},
+    {v:'onboarding', ic:'clipboard', t:'性格診断（100問）'},
     {v:'personality', ic:'compass', t:'営業タイプ診断'},
     {v:'score', ic:'trendUp', t:'成長スコア'},
     {grp:'応援・サポート'},
@@ -1297,7 +1298,7 @@ function renderWho(){
 }
 function renderSide(){
   // 受講者ゲート中はナビを隠し、診断に集中させる
-  if(state.role==='user' && !onbDone()){
+  if(state.role==='user' && !onbDone() && !testBypass()){
     var a2=onbAnswered();
     el('side').innerHTML='<div class="side-coach" style="background:var(--em-tint);border-color:var(--em-soft)"><div class="av" style="background:linear-gradient(135deg,var(--em),var(--em-deep))">'+svg('compass')+'</div><div style="min-width:0"><div class="lab" style="color:var(--em-dark)">受講者 登録ステップ</div><div class="nm">100問 性格診断</div><div class="ro" id="onbSideCount">'+a2+' / '+ONB_Q.length+' 回答</div></div></div>'
       + '<div class="grp">マイページ</div>'
@@ -1323,9 +1324,11 @@ function renderSide(){
 }
 // 受講者は「100問パーソナリティ診断」を答えるまでマイページに入れない（診断＝ログインゲート）
 function onbDone(){ return !!(state.onboarding); }
+// テスト/デモ/スタンドアロンでは100問ゲートをスキップ → ログインで直接マイページ（診断は任意）
+function testBypass(){ return (!SERVER) || (SERVER && USER && USER.demo); }
 function render(){
   // 受講者ゲート：診断未完了なら必ず診断画面へ
-  if(state.role==='user' && !onbDone() && state.view!=='onboarding' && state.view!=='onboardingResult'){ state.view='onboarding'; }
+  if(state.role==='user' && !onbDone() && !testBypass() && state.view!=='onboarding' && state.view!=='onboardingResult'){ state.view='onboarding'; }
   // 管理者/運営＝PRO Athlete（ネイビー×ゴールド）、それ以外＝Standard（ピンク）
   document.body.classList.toggle('theme-pro', state.role==='admin' || state.role==='operator');
   renderWho(); renderSide();
@@ -3329,7 +3332,7 @@ async function afterLogin(){
   var cb=el('cfgBtn'); if(cb) cb.style.display='none';          // キーはサーバー側
   await serverLoad();
   // 受講者は100問パーソナリティ診断に答えるまでマイページに入れない（render()のゲートが担保）
-  if(USER.role==='member' && !state.onboarding){ state.view='onboarding'; }
+  if(USER.role==='member' && !state.onboarding && !USER.demo){ state.view='onboarding'; }
   render();
 }
 
