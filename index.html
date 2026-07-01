@@ -3390,9 +3390,20 @@ function showLogin(err){
 }
 async function doLogin(e){
   if(e) e.preventDefault();
+  var em=(el('loginEmail')||{}).value||'', pw=(el('loginPw')||{}).value||'';
+  // スタンドアロン（サーバー無し・GitHub Pages等）：クライアント判定でログイン
+  if(!SERVER){
+    if(em.trim().toLowerCase()==='test' && pw==='test'){
+      USER={ id:'u_demo', name:'デモ ユーザー', email:'test', role:'member', demo:true };
+      el('modalRoot').innerHTML='';
+      var rs=el('roleswitch'); if(rs) rs.style.display='flex';   // 全ロール切替を表示
+      state.role='user'; state.view='today'; render(); showIntro();
+    } else { showLogin('ID / PASS が違います（デモは test / test）'); }
+    return;
+  }
   var btn=el('loginBtn'); if(btn){ btn.disabled=true; btn.textContent='確認中…'; }
   try{
-    var r=await fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email:el('loginEmail').value,password:el('loginPw').value})});
+    var r=await fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email:em,password:pw})});
     var j=await r.json();
     if(!r.ok){ showLogin(j.error||'ログインに失敗しました'); return; }
     USER=j.user; await afterLogin();
@@ -3454,9 +3465,10 @@ async function submitOnboarding(){
     if(r.status===200){ SERVER=true; var j=await r.json(); USER=j.user; AI_ENABLED=!!j.aiEnabled; await afterLogin(); return; }
     if(r.status===401){ SERVER=true; AI_ENABLED=false; render(); showLogin(); return; }
   }catch(e){ /* ファイル直開き等 → スタンドアロン */ }
-  // スタンドアロン（ブラウザキー）モード
-  loadData(); renderCfgState(); render();
-  showIntro(); // デモの入口ガイド（営業導線）
+  // スタンドアロン（ブラウザキー）モード：入口はログイン画面（ID/PASS）
+  loadData(); renderCfgState();
+  var rs=el('roleswitch'); if(rs) rs.style.display='none'; // ログイン前はロール切替を隠す
+  render(); showLogin();
 })();
 </script>
 </body>
