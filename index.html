@@ -341,6 +341,36 @@
   .sched-req .sact{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
   .sched-conf{display:flex;gap:14px;align-items:center;background:linear-gradient(120deg,var(--em-tint),var(--card));border:1px solid var(--em-soft);border-left:4px solid var(--em);border-radius:14px;padding:16px 18px;margin-bottom:16px}
   .sched-conf .sc-ic{width:46px;height:46px;border-radius:12px;background:var(--em-soft);color:var(--em-deep);display:grid;place-items:center;flex:0 0 auto}
+  /* デモ・イントロ／提案サマリー（営業導線） */
+  .intro-card{width:min(94vw,620px);background:#fff;border-radius:22px;overflow:hidden}
+  .intro-hero{background:radial-gradient(120% 140% at 80% 0,#1c2c5a,#0d1b4c 60%,#07112f);color:#fff;padding:34px 30px 26px}
+  .intro-hero .ey{font-size:11px;font-weight:800;letter-spacing:.12em;color:#e7d4a0}
+  .intro-hero h2{font-size:24px;font-weight:900;margin:10px 0 8px;line-height:1.35}
+  .intro-hero p{font-size:13px;color:#c7cee4;margin:0;line-height:1.7}
+  .intro-body{padding:22px 24px}
+  .intro-pick{display:flex;flex-direction:column;gap:10px}
+  .intro-pick button{display:flex;align-items:center;gap:13px;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px 16px;cursor:pointer;font-family:inherit;text-align:left;transition:all .12s}
+  .intro-pick button:hover{border-color:var(--pink);background:var(--pink-soft)}
+  .intro-pick .ii{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto;color:#fff}
+  .intro-pick .ii.a{background:linear-gradient(135deg,#ff9ab8,#f5427a)} .intro-pick .ii.b{background:linear-gradient(135deg,#e7d4a0,#b68a2a)} .intro-pick .ii.c{background:linear-gradient(135deg,var(--em),var(--em-deep))}
+  .intro-pick b{font-size:14px;display:block} .intro-pick small{font-size:11.5px;color:var(--mut)}
+  /* 提案サマリー */
+  .pitch-hero{background:radial-gradient(120% 140% at 85% 0,#1c2c5a,#0d1b4c 55%,#07112f);color:#fff;border-radius:20px;padding:32px 30px;margin-bottom:16px}
+  .pitch-hero .ey{font-size:12px;font-weight:800;letter-spacing:.1em;color:#e7d4a0}
+  .pitch-hero h2{font-size:26px;font-weight:900;letter-spacing:-.01em;margin:10px 0 8px;line-height:1.3}
+  .pitch-hero p{font-size:13.5px;color:#c7cee4;margin:0;max-width:640px}
+  .pnum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:820px){.pnum-grid{grid-template-columns:1fr 1fr}}
+  .pnum{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--pink);border-radius:14px;padding:16px}
+  body.theme-pro .pnum{background:#0f1d52;border-color:#24306a;border-left-color:var(--gold);color:#fff}
+  .pnum .n{font-size:30px;font-weight:900;line-height:1;color:#b53a63} body.theme-pro .pnum .n{color:#f6d365}
+  .pnum .l{font-size:11.5px;color:var(--mut);margin-top:6px;font-weight:600} body.theme-pro .pnum .l{color:#aab2d8}
+  .pnum .s{font-size:10.5px;font-weight:800;color:var(--em-deep);margin-top:4px}
+  .pstep{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  @media(max-width:820px){.pstep{grid-template-columns:1fr 1fr}}
+  .pstep .st{border:1px solid var(--line);border-radius:12px;padding:13px 10px;text-align:center} body.theme-pro .pstep .st{background:#0f1d52;border-color:#24306a}
+  .pstep .st .n{width:28px;height:28px;border-radius:50%;background:var(--pink-soft);color:#b53a63;font-weight:900;display:grid;place-items:center;margin:0 auto 7px}
+  .pstep .st small{font-size:11px;font-weight:700;color:var(--ink-2)} body.theme-pro .pstep .st small{color:#d6dbf0}
   /* タスク1: ログインのアナウンサー・ショーケース */
   .lp-hero{background:linear-gradient(135deg,#ff6b9d,#ff8c42);color:#fff;border-radius:16px;padding:22px 22px 20px;margin-bottom:16px;position:relative;overflow:hidden}
   .lp-hero .ey{font-size:11px;font-weight:800;letter-spacing:.1em;opacity:.95}
@@ -1147,6 +1177,8 @@ var NAV = {
     {v:'pro', ic:'crown', t:'PRO Athlete'}
   ],
   admin:[
+    {grp:'営業・提案'},
+    {v:'pitch', ic:'trendUp', t:'提案サマリー'},
     {grp:'組織マネジメント'},
     {v:'dashboard', ic:'grid', t:'会社ダッシュボード'},
     {v:'members', ic:'users', t:'メンバー一覧'},
@@ -1965,6 +1997,30 @@ VIEWS.user.schedule=function(){
   return pageHead('面談カレンダー','担当コーチ（'+an.name+'）との面談日をカレンダーで相互調整。空き枠から選ぶ→承認／別日提案でやりとりします。',
       SCHEDULE.confirmed?'<span class="pill em">確定済み</span>':'<span class="pill pink">調整中</span>')
     + conf + grid + reqHtml;
+};
+
+// 提案サマリー（経営者向け・営業導線の中心）
+VIEWS.admin.pitch=function(){
+  function pnum(n,l,s){ return '<div class="pnum"><div class="n">'+n+'</div><div class="l">'+l+'</div>'+(s?'<div class="s">'+s+'</div>':'')+'</div>'; }
+  function st(n,t){ return '<div class="st"><div class="n">'+n+'</div><small>'+t+'</small></div>'; }
+  return '<div class="pitch-hero"><div class="ey">導入ご提案サマリー</div><h2>営業の“感情”と“数字”を、<br>本物の伴走で動かす。</h2><p>ホリプロ所属アナウンサー・現役アスリート × AIコーチング。離職を防ぎ、成約と継続を生み、続けるほど成長が数字で見える営業組織へ。</p></div>'
+   + secH('alert','よくある課題')+'<div class="chips" style="margin-bottom:18px"><span class="chip w">営業の離職・早期退職</span><span class="chip w">モチベの波・成約率の停滞</span><span class="chip w">育成のばらつき・属人化</span><span class="chip w">上司の言葉が響かない</span></div>'
+   + secH('trendUp','導入効果（実証・サンプル）')+'<div class="pnum-grid" style="margin-bottom:18px">'
+     + pnum('+12pt','同行日の成約率','やった日 vs やらない日')
+     + pnum('11%→4%','営業の離職率','3ヶ月で改善')
+     + pnum('92%','日報の継続入力率','習慣化')
+     + pnum('+15%','平均成長スコア','導入時比')
+   + '</div>'
+   + secH('award','収益性（法人プラン）')+'<div class="pnum-grid" style="margin-bottom:18px">'
+     + pnum('¥50〜300万','月額5プラン','係数帯で選べる幅が拡大')
+     + pnum('平均56%','ブレンド粗利率','ポートフォリオ試算')
+     + pnum('約4倍','LTV差','年間契約 vs 3ヶ月解約')
+     + pnum('PRO〜','現役アスリート面談','選手＋ペアコーチ')
+   + '</div>'
+   + '<div class="card" style="margin-bottom:18px">'+secH('sparkles','なぜ効くのか（差別化）')+'<p class="muted" style="margin:-6px 0 0;font-size:13px">“憧れ（炎）”で引き、AIと連続プログラム（薪）で残す。話題性を「成果KPIの数字」に転化し、承認・連続化で継続課金の根拠をつくる設計です。競合HRツール（分析・AI）にはない“本物の人の伴走”が中核です。</p></div>'
+   + secH('calendar','導入の流れ')+'<div class="pstep" style="margin-bottom:18px">'+st('01','お問い合わせ')+st('02','ヒアリング・ご提案')+st('03','コーチ選定・プラン')+st('04','キックオフ')+st('05','運用・効果測定')+'</div>'
+   + '<div class="card" style="background:linear-gradient(120deg,#0d1b4c,#1c2c5a);color:#fff;text-align:center;padding:30px"><b style="font-size:19px">本物の伴走を、あなたの組織に。</b><div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn btn-gold" href="'+CONTACT_URL+'" target="_blank" rel="noopener">'+svg('message')+'資料請求・お問い合わせ</a><button class="btn btn-line" data-view="findcoach">'+svg('sparkles')+'コーチ調達を見る</button></div></div>'
+   + '<p class="muted" style="font-size:10.5px;margin:12px 0 0;text-align:center">※数値・料金は実証実験用のサンプル。実名・実写は許諾確定後に反映します。</p>';
 };
 
 /* ---- コーチ側（coachロールに統合）：自分の係数・ランク・ガバショテスト ---- */
@@ -3202,6 +3258,12 @@ document.addEventListener('click', function(e){
   if(e.target.closest('#completeDay')){ state.dayDone=true; ME.streak+=1; saveData(); toast('今日を完了！連続記録が '+ME.streak+'日 になりました'); celebrate(); render(); return; }
   // coaching request
   if(e.target.closest('#reqCoach')){ state.view='schedule'; render(); return; }
+  // デモ・イントロの選択（営業導線）
+  t=e.target.closest('[data-intro]'); if(t){ var iv=t.getAttribute('data-intro'); el('modalRoot').innerHTML='';
+    if(iv==='user'){ state.role='user'; state.view='today'; }
+    else if(iv==='pitch'){ state.role='admin'; state.view='pitch'; }
+    if(el('roleswitch')){ [].forEach.call(el('roleswitch').children,function(b){ b.classList.toggle('on', b.getAttribute('data-role')===state.role); }); }
+    render(); return; }
   // 面談カレンダー：相互日程調整
   t=e.target.closest('[data-schedmonth]'); if(t){ SCHEDULE.monthOffset=Math.max(0,Math.min(6,SCHEDULE.monthOffset+parseInt(t.getAttribute('data-schedmonth'),10))); state.schedSel=null; render(); return; }
   t=e.target.closest('[data-schedday]'); if(t){ state.schedSel=t.getAttribute('data-schedday'); render(); return; }
@@ -3285,6 +3347,19 @@ function startCoachSlider(){
     tr.addEventListener('touchend',function(e){ var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40){ goSlide(_slideIdx+(dx<0?1:-1)); clearInterval(_slideTimer); _slideTimer=setInterval(function(){ if(!el('slidesTrack')){clearInterval(_slideTimer);return;} goSlide(_slideIdx+1); },3000); } },{passive:true});
   }
 }
+// 営業導線：LP・問い合わせURL（固定・GitHub Pages）
+var LP_URL='https://shintaro1955-bot.github.io/gabasho-lp/';
+var CONTACT_URL='https://shintaro1955-bot.github.io/gabasho-lp/contact.html';
+// デモの入口ガイド（3視点で体験）
+function showIntro(){
+  el('modalRoot').innerHTML='<div class="modal-ov" id="introModal"><div class="modal-card intro-card">'
+   +'<div class="intro-hero"><div class="ey">HORIPRO × A.B.HAP　ガバショ！</div><h2>3分でわかる、ガバショ！デモ</h2><p>本物のホリプロアナウンサー・現役アスリートが、AIとともに営業を伴走。「感情 × 数字」で、成約・継続・定着を動かします。見たい視点を選んでください。</p></div>'
+   +'<div class="intro-body"><div class="intro-pick">'
+   +'<button data-intro="user"><span class="ii a">'+svg('user')+'</span><span><b>営業マンとして体験する</b><small>日報 → AI応援 → スキル・面談カレンダー…現場の毎日</small></span></button>'
+   +'<button data-intro="pitch"><span class="ii b">'+svg('trendUp')+'</span><span><b>経営者として“効果と数字”を見る</b><small>提案サマリー：導入効果・料金・粗利・導入フロー</small></span></button>'
+   +'<button data-intro="free"><span class="ii c">'+svg('sparkles')+'</span><span><b>自由に触る（全ロール切替）</b><small>一般／管理者／コーチ／運営を切り替えて確認</small></span></button>'
+   +'</div><p class="muted" style="font-size:10.5px;margin:14px 0 0;text-align:center">いつでも上部タブでロール切替できます。実名・実写は※サンプルです。</p></div></div></div>';
+}
 function showLogin(err){
   // タスク1: ログイン画面をホリプロアナウンサーのショーケースに
   var annCards=ANNOUNCERS.map(function(a){
@@ -3334,6 +3409,7 @@ async function afterLogin(){
   // 受講者は100問パーソナリティ診断に答えるまでマイページに入れない（render()のゲートが担保）
   if(USER.role==='member' && !state.onboarding && !USER.demo){ state.view='onboarding'; }
   render();
+  if(USER.demo){ showIntro(); } // デモアカウントは入口ガイドを表示
 }
 
 // 100問の診断結果（上位の軸）から営業タイプ（personality）を確定し、相性診断・コーチ選定に反映
@@ -3380,6 +3456,7 @@ async function submitOnboarding(){
   }catch(e){ /* ファイル直開き等 → スタンドアロン */ }
   // スタンドアロン（ブラウザキー）モード
   loadData(); renderCfgState(); render();
+  showIntro(); // デモの入口ガイド（営業導線）
 })();
 </script>
 </body>
