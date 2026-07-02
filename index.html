@@ -711,11 +711,11 @@
 
 <div class="appbar">
   <div class="appbar-in">
-    <a class="cobrand" href="#"><span class="star"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;vertical-align:-2px"><path d="M12 3l2.6 5.6L21 9.3l-4.5 4.2 1.1 6.1L12 16.9 6.4 19.6l1.1-6.1L3 9.3l6.4-.7z"/></svg></span><span class="horipro">HORIPRO</span><span class="x">×</span><span class="abhap">A.B.HAP</span><span class="ga">ガバショ！</span></a>
+    <a class="cobrand" href="#"><span class="star"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;vertical-align:-2px"><path d="M12 3l2.6 5.6L21 9.3l-4.5 4.2 1.1 6.1L12 16.9 6.4 19.6l1.1-6.1L3 9.3l6.4-.7z"/></svg></span><span class="horipro">HORIPRO（仮）</span><span class="x">×</span><span class="abhap">A.B.HAP</span><span class="ga">ガバショ！</span></a>
     <div class="roleswitch" id="roleswitch" role="tablist" aria-label="ロール切替（デモ）">
       <button data-role="user" class="on"><span class="lbl">一般ユーザー</span></button>
       <button data-role="admin"><span class="lbl">会社管理者</span></button>
-      <button data-role="coach"><span class="lbl">コーチ／ホリプロ</span></button>
+      <button data-role="coach"><span class="lbl">コーチ／ホリプロ（仮）</span></button>
       <button data-role="operator"><span class="lbl">運営</span></button>
     </div>
     <button class="cfgbtn" id="notifyBtn" aria-label="通知">通知</button>
@@ -921,7 +921,7 @@ var GOALS = [
 
 // 受信したお祝い動画（ユーザーBOX）
 var MY_VIDEOS = [
-  {id:'v1', reason:'初成約達成', title:'初成約おめでとう！', talent:'ホリプロ公式コーチ', badge:'ファースト成約バッジ', type:'achievement', status:'unread',
+  {id:'v1', reason:'初成約達成', title:'初成約おめでとう！', talent:'ホリプロ（仮）公式コーチ', badge:'ファースト成約バッジ', type:'achievement', status:'unread',
     script:'田中さん、初成約おめでとうございます！毎日の振り返りを欠かさず続けてきたことが、ちゃんと結果に繋がりましたね。この勢いで、次の一件へ進んでいきましょう！'},
   {id:'v2', reason:'日記23日連続', title:'継続23日、立派です！', talent:'女子アナ 三上さん', badge:'継続ブロンズ', type:'streak', status:'unread',
     script:'23日連続の入力、本当に素晴らしい継続力です。続けること自体が一番むずかしい。あなたはもう「やり切れる人」です。30日まであと一息、一緒に走り切りましょう！'}
@@ -1309,7 +1309,7 @@ var ICONS={
   swap:'<path d="M7 4l-3 3 3 3"/><path d="M4 7h11a4 4 0 0 1 4 4"/><path d="M17 20l3-3-3-3"/><path d="M20 17H9a4 4 0 0 1-4-4"/>',
   sparkles:'<path d="M12 4l1.4 4.1L17.5 9.5 13.4 11 12 15l-1.4-4L6.5 9.5l4.1-1.4z"/><path d="M18 14l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/>'
 };
-// AIの顔＝ホリプロ所属アナウンサーのアイコン（実写は許諾前のためイラスト表現）
+// AIの顔＝ホリプロ（仮）所属アナウンサーのアイコン（実写は許諾前のためイラスト表現）
 function aiFace(sz,cls){ sz=sz||36; return '<span class="aiface '+(cls||'')+'" style="width:'+sz+'px;height:'+sz+'px">'+personSil()+'</span>'; }
 // 女子アナ・選手の顔部分＝人物イメージ（塗りのシルエット）で代替（写真許諾後に差し替え）
 function personSil(){ return '<svg class="psil" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8" r="4.3"/><path d="M12 13.4c-4.5 0-8.2 2.7-8.2 6.3V21h16.4v-1.3c0-3.6-3.7-6.3-8.2-6.3z"/></svg>'; }
@@ -1330,7 +1330,7 @@ function renderWho(){
     return;
   }
   var map={ user:['田中 翔太','株式会社ネクステージ','田'], admin:['営業企画 管理者','株式会社ネクステージ','管'],
-    coach:['三上 あかり（コーチ）','HORIPRO × A.B.HAP','三'], operator:['ガバショ！運営','Fit Founder','運'] };
+    coach:['三上 あかり（コーチ）','HORIPRO（仮） × A.B.HAP','三'], operator:['ガバショ！運営','Fit Founder','運'] };
   var w=map[state.role];
   el('who').innerHTML=planBadge()+'<div style="text-align:right"><b>'+w[0]+'</b><small>'+w[1]+'</small></div><div class="av">'+w[2]+'</div>';
 }
@@ -1348,9 +1348,9 @@ function renderSide(){
   var profile='';
   if(state.role==='user'){
     var an=assignedAnnouncer();
-    profile='<div class="side-coach"><div class="av">'+personSil()+'</div><div style="min-width:0"><div class="lab">あなたの担当コーチ</div><div class="nm">'+(an.name||'三上 あかり（※サンプル）')+'</div><div class="ro">'+(an.role||'ホリプロ アナウンサー')+'</div></div></div>';
+    profile='<div class="side-coach"><div class="av">'+personSil()+'</div><div style="min-width:0"><div class="lab">あなたの担当コーチ</div><div class="nm">'+(an.name||'三上 あかり（※サンプル）')+'</div><div class="ro">'+(an.role||'ホリプロ（仮） アナウンサー')+'</div></div></div>';
   } else if(state.role==='coach'){
-    profile='<div class="side-self"><div class="top"><div class="av">三</div><div style="min-width:0"><div class="lab">HORIPRO 認定コーチ</div><div class="nm">三上 あかり（※サンプル）</div><div class="ro">ホリプロ アナウンサー</div></div></div>'
+    profile='<div class="side-self"><div class="top"><div class="av">三</div><div style="min-width:0"><div class="lab">HORIPRO（仮） 認定コーチ</div><div class="nm">三上 あかり（※サンプル）</div><div class="ro">ホリプロ（仮） アナウンサー</div></div></div>'
       + '<div class="stat"><div class="s"><b>12</b><small>担当メンバー</small></div><div class="s"><b>4.9</b><small>平均評価</small></div><div class="s"><b>S</b><small>ランク</small></div></div></div>';
   }
   el('side').innerHTML=profile+NAV[state.role].map(function(it){
@@ -1414,11 +1414,11 @@ var COACHES=[
     tags:['論理的','分析型','メンタル管理'], strength:'数字と向き合い、改善の型をつくる', matchKeys:['分析改善','論理','目標達成','戦略','冷静'],
     rating:4.6, message:'昨日の自分に1つだけ勝とう。'}
 ];
-// ホリプロ所属アナウンサー（実名・実写は許諾前のため※サンプル＋イニシャルアバター）
+// ホリプロ（仮）所属アナウンサー（実名・実写は許諾前のため※サンプル＋イニシャルアバター）
 var ANNOUNCERS=[
-  {ini:'三', name:'三上 あかり（※サンプル）', role:'ホリプロ アナウンサー', tag:'傾聴・共感型', msg:'あなたの毎日の一歩、ちゃんと見ています。一緒に積み上げましょう。', good:'話を引き出し、気持ちを整える'},
-  {ini:'林', name:'林 みなと（※サンプル）', role:'ホリプロ アナウンサー', tag:'明るい・前向き型', msg:'今日の小さな前進、ちゃんと一緒に喜ばせてください。', good:'モチベーションを上げる声かけ'},
-  {ini:'葵', name:'桜井 葵（※サンプル）', role:'ホリプロ アナウンサー', tag:'冷静・論理型', msg:'感情を言葉にすると、次の一手が見えてきます。', good:'課題を整理して言語化する'}
+  {ini:'三', name:'三上 あかり（※サンプル）', role:'ホリプロ（仮） アナウンサー', tag:'傾聴・共感型', msg:'あなたの毎日の一歩、ちゃんと見ています。一緒に積み上げましょう。', good:'話を引き出し、気持ちを整える'},
+  {ini:'林', name:'林 みなと（※サンプル）', role:'ホリプロ（仮） アナウンサー', tag:'明るい・前向き型', msg:'今日の小さな前進、ちゃんと一緒に喜ばせてください。', good:'モチベーションを上げる声かけ'},
+  {ini:'葵', name:'桜井 葵（※サンプル）', role:'ホリプロ（仮） アナウンサー', tag:'冷静・論理型', msg:'感情を言葉にすると、次の一手が見えてきます。', good:'課題を整理して言語化する'}
 ];
 // タスク2: 曜日で切り替わる「今日のひとこと」（0=日 〜 6=土）
 var COACH_DOW=[
@@ -1433,7 +1433,7 @@ var COACH_DOW=[
 function todayHitokoto(){ try{ return COACH_DOW[new Date().getDay()]; }catch(e){ return COACH_DOW[1]; } }
 function assignedAnnouncer(){
   var ac=state.assignedCoach;
-  if(ac && ac.name){ var hit=ANNOUNCERS.filter(function(a){return a.name===ac.name;})[0]; return hit||{ini:(ac.name||'三').trim().charAt(0), name:ac.name, role:ac.title||'ホリプロ アナウンサー', tag:'', msg:ac.reason||''}; }
+  if(ac && ac.name){ var hit=ANNOUNCERS.filter(function(a){return a.name===ac.name;})[0]; return hit||{ini:(ac.name||'三').trim().charAt(0), name:ac.name, role:ac.title||'ホリプロ（仮） アナウンサー', tag:'', msg:ac.reason||''}; }
   return ANNOUNCERS[0];
 }
 function coachById(id){ return COACHES.filter(function(c){return c.id===id;})[0]; }
@@ -2009,7 +2009,7 @@ VIEWS.user.schedule=function(){
 VIEWS.admin.pitch=function(){
   function pnum(n,l,s){ return '<div class="pnum"><div class="n">'+n+'</div><div class="l">'+l+'</div>'+(s?'<div class="s">'+s+'</div>':'')+'</div>'; }
   function st(n,t){ return '<div class="st"><div class="n">'+n+'</div><small>'+t+'</small></div>'; }
-  return '<div class="pitch-hero"><div class="ey">導入ご提案サマリー</div><h2>営業の“感情”と“数字”を、<br>本物の伴走で動かす。</h2><p>ホリプロ所属アナウンサー・現役アスリート × AIコーチング。離職を防ぎ、成約と継続を生み、続けるほど成長が数字で見える営業組織へ。</p></div>'
+  return '<div class="pitch-hero"><div class="ey">導入ご提案サマリー</div><h2>営業の“感情”と“数字”を、<br>本物の伴走で動かす。</h2><p>ホリプロ（仮）所属アナウンサー・現役アスリート × AIコーチング。離職を防ぎ、成約と継続を生み、続けるほど成長が数字で見える営業組織へ。</p></div>'
    + secH('alert','よくある課題')+'<div class="chips" style="margin-bottom:18px"><span class="chip w">営業の離職・早期退職</span><span class="chip w">モチベの波・成約率の停滞</span><span class="chip w">育成のばらつき・属人化</span><span class="chip w">上司の言葉が響かない</span></div>'
    + secH('trendUp','導入効果（実証・サンプル）')+'<div class="pnum-grid" style="margin-bottom:18px">'
      + pnum('+12pt','同行日の成約率','やった日 vs やらない日')
@@ -2078,7 +2078,7 @@ function rewardVideos(){
     {id:'rv_7',     title:'7日連続 達成', coachName:'元プロ野球選手 A', emoji:'', cond:'7日連続', req:7, premium:false},
     {id:'rv_s80',   title:'成長スコア80突破', coachName:'モデル D', emoji:'', cond:'成長スコア80', reqScore:80, premium:false},
     {id:'rv_30',    title:'30日連続 達成 限定', coachName:'元サッカー日本代表 C', emoji:'', cond:'30日連続', req:30, premium:true},
-    {id:'rv_goal',  title:'目標達成 特別お祝い', coachName:'ホリプロ公式コーチ', emoji:'', cond:'目標達成', req:999, premium:true}
+    {id:'rv_goal',  title:'目標達成 特別お祝い', coachName:'ホリプロ（仮）公式コーチ', emoji:'', cond:'目標達成', req:999, premium:true}
   ].map(function(v){
     v.isUnlocked = v.reqScore ? (sc>=v.reqScore) : (s>=v.req);
     v.remain = v.reqScore ? Math.max(0, v.reqScore-sc) : Math.max(0, v.req-s);
@@ -2157,7 +2157,7 @@ VIEWS.user.today=function(){
     : '';
   // タスク2: 今日のコーチからのひとことバナー（曜日で内容が変わる）
   var an=assignedAnnouncer();
-  var hitokoto='<div class="hitokoto"><div class="av">'+personSil()+'</div><div><div class="lab">今日のコーチからのひとこと</div><div class="nm">'+an.name+' ／ '+(an.role||'ホリプロ アナウンサー')+'</div><div class="msg">'+todayHitokoto()+'</div></div></div>';
+  var hitokoto='<div class="hitokoto"><div class="av">'+personSil()+'</div><div><div class="lab">今日のコーチからのひとこと</div><div class="nm">'+an.name+' ／ '+(an.role||'ホリプロ（仮） アナウンサー')+'</div><div class="msg">'+todayHitokoto()+'</div></div></div>';
   return pageHead('今日の一歩を残す','今日も伴走者が、あなたの前進を見ています。続けるほど、成長は可視化されます。','<span class="pill em">'+svg('flame')+ME.streak+'日連続 入力中</span>')
     + hitokoto
     + hero + vb
@@ -2225,7 +2225,7 @@ VIEWS.user.streak=function(){
       + '<div class="card">'+secH('flame','継続カレンダー（直近5週間）')+'<p class="muted" style="margin:-6px 0 12px;font-size:12px">入力した日に色がつきます。空白を減らしていきましょう。</p><div class="cal">'+calHtml+'</div>'
         + '<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><span class="pill em">最長連続 '+ME.streak+'日</span><span class="pill gold">今月の入力 '+ME.streak+'日</span><span class="pill b">成長スコア '+sc+'</span></div></div>'
       + '<div class="card">'+secH('target','営業目標（毎日ふり返って更新）')+goalsHtml
-        + '<p class="muted" style="margin:6px 0 0;font-size:11.5px">目標を達成すると、ホリプロ所属者から特別なお祝い動画が届きます。</p></div>'
+        + '<p class="muted" style="margin:6px 0 0;font-size:11.5px">目標を達成すると、ホリプロ（仮）所属者から特別なお祝い動画が届きます。</p></div>'
     + '</div>'
     + '<div class="card" style="margin-top:16px">'+secH('award','継続バッジ')+'<div class="badges">'
       + badge('award','継続ブロンズ','7日連続 達成',false)+badge('flame','継続シルバー','30日連続まで あと'+Math.max(0,30-ME.streak)+'日',true)
@@ -2238,11 +2238,11 @@ VIEWS.user.ai=function(){
   var th = state.msgThread!==null ? state.msgThread : [
     {from:'coach', name:coachName, text:'田中さん、今週も継続できていますね。疲れが出やすい時期なので、完璧より「最低ライン」を守れたら十分です。気になることがあれば、いつでもここから話しかけてください。'}
   ];
-  // タスク3: コーチバブルにホリプロ表示・認定バッジを追加
+  // タスク3: コーチバブルにホリプロ（仮）表示・認定バッジを追加
   var bubbles = th.length ? th.map(function(mm){
     if(mm.from==='coach'){
-      return '<div class="bubble coach"><div class="bfrom">'+(mm.name||coachName)+'（ホリプロ）</div>'+mm.text
-        + '<div class="bcert">'+svg('check')+'ホリプロ認定コーチ</div></div>';
+      return '<div class="bubble coach"><div class="bfrom">'+(mm.name||coachName)+'（ホリプロ（仮））</div>'+mm.text
+        + '<div class="bcert">'+svg('check')+'ホリプロ（仮）認定コーチ</div></div>';
     }
     return '<div class="bubble me"><div class="who">あなた</div>'+mm.text+'</div>';
   }).join('') : '<div class="muted" style="text-align:center;padding:24px">まだメッセージはありません。コーチからの応援が届くと、ここに表示されます。</div>';
@@ -2251,8 +2251,8 @@ VIEWS.user.ai=function(){
   var leaderHtml = ln.length ? '<div class="card" style="margin-bottom:16px"><div class="vsec-h" style="margin-top:0">'+svg('building')+'社長・上司からのコメント</div>'
       + ln.map(function(n){ var pres=n.role==='president'; return '<div class="bubble coach" style="max-width:100%;background:'+(pres?'var(--gold-soft)':'var(--blue-soft)')+';border:0;margin-bottom:8px"><div class="who">'+(pres?'社長':'上司')+'</div>'+n.text+'</div>'; }).join('')+'</div>' : '';
   var an=assignedAnnouncer();
-  var brand='<div class="coach-brand"><div class="av">'+personSil()+'</div><div style="flex:1;min-width:0"><div class="nm">'+coachName+'</div><div class="ro">'+(an.role||'ホリプロ アナウンサー')+'</div><div class="cert">'+svg('check')+'ホリプロ認定コーチ</div></div></div>';
-  return pageHead('コーチからの応援','担当のホリプロアナウンサーが、あなたの日記と状態を見たうえで応援メッセージを送ります。ここから直接やりとりできます。')
+  var brand='<div class="coach-brand"><div class="av">'+personSil()+'</div><div style="flex:1;min-width:0"><div class="nm">'+coachName+'</div><div class="ro">'+(an.role||'ホリプロ（仮） アナウンサー')+'</div><div class="cert">'+svg('check')+'ホリプロ（仮）認定コーチ</div></div></div>';
+  return pageHead('コーチからの応援','担当のホリプロ（仮）アナウンサーが、あなたの日記と状態を見たうえで応援メッセージを送ります。ここから直接やりとりできます。')
     + brand
     + leaderHtml
     + '<div class="card"><div class="thread">'+bubbles+'</div>'
@@ -2340,9 +2340,9 @@ VIEWS.user.videos=function(){
       + '<button class="share-btn" data-sharelink="1">'+svg('link')+'リンクをコピー</button>'
     + '</div>';
   }
-  // タスク4: 各カードにコーチ（ホリプロ）情報を表示
+  // タスク4: 各カードにコーチ（ホリプロ（仮））情報を表示
   var openCards=MY_VIDEOS.map(function(v){
-    var meta='<div class="vmeta"><div class="mav">'+(v.talent||'三').trim().charAt(0)+'</div><div style="flex:1;min-width:0"><div class="mn">'+(v.talent||'コーチ')+'</div><div class="mr">ホリプロ アナウンサー</div></div><span class="hbadge">HORIPRO</span></div>';
+    var meta='<div class="vmeta"><div class="mav">'+(v.talent||'三').trim().charAt(0)+'</div><div style="flex:1;min-width:0"><div class="mn">'+(v.talent||'コーチ')+'</div><div class="mr">ホリプロ（仮） アナウンサー</div></div><span class="hbadge">HORIPRO（仮）</span></div>';
     return '<div class="vcard-outer"><div class="vcard" data-playvideo="'+v.id+'"><div class="thumb">'+(v.status==='unread'?'<span class="unread">NEW</span>':'')+'<div class="pav">'+personSil()+'</div><div class="play">'+svg('play')+'</div><div class="pname">'+(v.talent||'')+'</div></div>'
       + '<div class="vb"><b>'+v.title+'</b><small>'+v.reason+'</small></div>'+meta+'</div>'
       + shareRow(v)+'</div>';
@@ -2364,8 +2364,8 @@ VIEWS.user.videos=function(){
     + '<div class="s"><b>'+ME.streak+'日</b><small>現在の連続日数</small></div>'
     + '<div class="s"><b>'+(nr?nr.cond:'—')+'</b><small>次の達成条件</small></div></div>';
   var anv=assignedAnnouncer();
-  var vbrand='<div class="video-brand"><div class="av">'+personSil()+'</div><div style="flex:1;min-width:200px"><b>ホリプロ所属アナウンサーからの特別動画</b><p>続けるほど、担当アナウンサー・著名人からお祝い／応援の動画が届きます。</p></div></div>';
-  return pageHead('応援動画BOX','続けるほど、ホリプロ所属アナウンサーから特別な動画が届く。あなたへのご褒美コンテンツです。','<span class="pill pink">'+unread+'件 未読</span>')
+  var vbrand='<div class="video-brand"><div class="av">'+personSil()+'</div><div style="flex:1;min-width:200px"><b>ホリプロ（仮）所属アナウンサーからの特別動画</b><p>続けるほど、担当アナウンサー・著名人からお祝い／応援の動画が届きます。</p></div></div>';
+  return pageHead('応援動画BOX','続けるほど、ホリプロ（仮）所属アナウンサーから特別な動画が届く。あなたへのご褒美コンテンツです。','<span class="pill pink">'+unread+'件 未読</span>')
     + vbrand
     + summary
     + (nr?'<div class="card" style="margin-bottom:8px;background:linear-gradient(120deg,var(--gold-soft),#fff);border-color:#eedfb4"><b style="font-size:14px">次の動画まで、あと'+nr.remain+nr.unit+'</b><span class="muted" style="font-size:12.5px;margin-left:8px">'+nr.cond+'で「'+nr.title+'」（'+nr.coachName+'）が届きます。</span></div>':'')
@@ -2433,7 +2433,7 @@ function planHearingSection(){
       + '<ul class="pf">'+p.feats.map(function(f){return '<li>'+svg('check')+f+'</li>';}).join('')+'</ul>'+cta+'</div>';
   }).join('')+'</div>';
   return '<div class="card" style="margin-bottom:16px">'+secH('announcer','女子アナ専属プラン診断（30秒）')
-    + '<p class="muted" style="margin:-6px 0 10px;font-size:12px">5つの質問に答えると、'+an.name+'たちホリプロアナウンサーとの、あなたにぴったりの関わり方が見つかります。</p>'
+    + '<p class="muted" style="margin:-6px 0 10px;font-size:12px">5つの質問に答えると、'+an.name+'たちホリプロ（仮）アナウンサーとの、あなたにぴったりの関わり方が見つかります。</p>'
     + '<div class="hear-prog"><i style="width:'+pct+'%"></i></div><div class="muted" style="font-size:11px;text-align:right;margin-bottom:6px">'+reco.answered+' / '+reco.total+' 問</div>'
     + qs + recoCard + grid
     + '<p class="muted" style="font-size:10.5px;margin:12px 0 0">※価格・特典は実証実験用のサンプル表示です。実際のプラン内容は変更される場合があります。</p></div>';
@@ -2541,7 +2541,7 @@ VIEWS.admin.dashboard=function(){
     return '<div class="row"><div class="av-c">'+avatarText(m.name)+'</div><div><div class="nm">'+m.name+' <span class="muted" style="font-weight:600;font-size:11px">／'+m.dept+'</span></div><div class="reason">'+svg('alert')+m.flags.join('・')+'</div></div><div class="act"><button class="btn btn-soft btn-sm" data-member="'+m.id+'">詳細</button>'+(m.coach?'<button class="btn btn-ghost btn-sm" data-arrange="'+m.id+'">面談手配</button>':'')+'</div></div>';
   }).join('');
   // タスク4: ガバショ！導入効果の実績サマリーカード（最上部）
-  var summaryShareText='【ガバショ！導入効果】\n・日報継続率 92%（前月比 +18pt）\n・平均成長スコア 71（導入時比 +15%）\n・累計お祝い／応援動画 128本\n・離職リスク高 メンバー -40%\nホリプロ所属者の伴走で、営業組織のコンディションが見える化できました。\n#ガバショ #営業DX #エンゲージメント';
+  var summaryShareText='【ガバショ！導入効果】\n・日報継続率 92%（前月比 +18pt）\n・平均成長スコア 71（導入時比 +15%）\n・累計お祝い／応援動画 128本\n・離職リスク高 メンバー -40%\nホリプロ（仮）所属者の伴走で、営業組織のコンディションが見える化できました。\n#ガバショ #営業DX #エンゲージメント';
   var summaryCard='<div class="card" style="margin-bottom:16px"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px">'+secH('trendUp','ガバショ！導入効果（今月）')+'<button class="btn btn-gold btn-sm" data-summaryshare="'+encodeURIComponent(summaryShareText)+'">'+svg('share')+'実績をシェア</button></div>'
     + '<div class="summary-grid">'
       + '<div class="sum-card"><div class="n">92%</div><div class="l">日報の継続率</div><div class="d">前月比 +18pt</div></div>'
@@ -2619,7 +2619,7 @@ VIEWS.admin.coachreq=function(){
       : '<button class="btn btn-em btn-sm" data-resolve="req_'+m.id+'">面談を手配</button>';
     return '<tr><td><div class="nmcell"><div class="av">'+avatarText(m.name)+'</div><b>'+m.name+'</b></div></td><td>'+m.dept+'</td><td><b>'+m.score+'</b></td><td>'+(m.flags.length?'<span class="pill warn">'+m.flags[0]+'</span>':'<span class="pill blue">本人希望</span>')+'</td><td>'+btn+'</td></tr>';
   }).join('');
-  return pageHead('コーチング希望者','ホリプロ側コーチへの面談手配を行います（AI事前分析つき）。','<span class="pill pink">'+reqs.length+'名 希望中</span>')
+  return pageHead('コーチング希望者','ホリプロ（仮）側コーチへの面談手配を行います（AI事前分析つき）。','<span class="pill pink">'+reqs.length+'名 希望中</span>')
     + (reqs.length?'<table class="tbl"><thead><tr><th>メンバー</th><th>部署</th><th>スコア</th><th>きっかけ</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>':'<div class="card muted">現在コーチング希望者はいません。</div>')
     + '<div class="privacy" style="margin-top:14px"><span>'+svg('lock')+'</span><div>コーチには面談に必要なAI要約・パーソナリティ傾向・注意点・本人が許可した日記要約のみが共有されます。</div></div>';
 };
@@ -2647,7 +2647,7 @@ VIEWS.admin.awards=function(){
     var reason=m.achiever?'月間目標達成':'成長スコア急上昇';
     return '<div class="listrow" style="border-color:var(--line)"><div class="av-c">'+avatarText(m.name)+'</div><div><div class="nm">'+m.name+'</div><div class="muted" style="font-size:12px">'+reason+' ／ スコア '+m.score+'</div></div><div class="act"><span class="pill gold">対象</span><button class="btn btn-gold btn-sm" data-sendvideo="'+m.id+'">お祝い動画を送る</button></div></div>';
   }).join('');
-  return pageHead('動画表彰管理','達成者へ、ホリプロ所属タレントからのお祝い動画を送ります（自動トリガー＋手動指定）。')
+  return pageHead('動画表彰管理','達成者へ、ホリプロ（仮）所属タレントからのお祝い動画を送ります（自動トリガー＋手動指定）。')
     + '<div class="card" style="margin-bottom:14px;display:flex;gap:14px;flex-wrap:wrap"><div class="threecol" style="flex:1;width:100%"><div class="kpi g"><div class="ic">'+svg('trophy')+'</div><div class="n">'+MEMBERS.filter(function(m){return m.achiever;}).length+'</div><div class="l">今月の達成者</div></div><div class="kpi"><div class="ic">'+svg('share')+'</div><div class="n">12</div><div class="l">今月の送信数</div></div><div class="kpi p"><div class="ic">'+svg('play')+'</div><div class="n">94%</div><div class="l">再生率</div></div></div></div>'
     + '<div class="card">'+rows+'</div>'
     + '<div class="card" style="margin-top:14px"><b style="font-size:13.5px">自動トリガー設定</b><div class="chips" style="margin-top:10px">'+['月間目標達成','初成約','日記30日連続','成長スコア90↑','前月比大幅改善','チームMVP'].map(function(s){return '<span class="chip">'+s+' ON</span>';}).join('')+'</div><p class="muted" style="margin:10px 0 0;font-size:12px">条件を満たすと自動でお祝い動画の収録依頼がコーチへ飛びます。</p></div>';
@@ -2668,7 +2668,7 @@ VIEWS.admin.settings=function(){
     + '<div class="privacy" style="margin-top:14px"><span>'+svg('lock')+'</span><div>センシティブ情報（日記・気分）の共有範囲はロールごとに制御されます。本人非同意の監視は行いません。</div></div>';
 };
 
-/* ===================== コーチ / ホリプロ ===================== */
+/* ===================== コーチ / ホリプロ（仮） ===================== */
 function aiBrief(u){
   return {
     summary: u.name+'さん（'+u.position+'）。タイプは「'+u.salesType+'」。直近は'+u.state+'。目標は「'+u.goal+'」。',
@@ -2792,7 +2792,7 @@ VIEWS.coach.vscript=function(){
     + '<div class="card" style="margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap"><div class="kpi-ic-lg">'+svg('video')+'</div><div style="flex:1;min-width:220px"><b>動画をアップロード</b><p class="muted" style="margin:3px 0 0;font-size:12px">収録した動画をアップすると、対象ユーザーのBOXに届きます。</p></div><button class="btn btn-em" id="uploadVideo">'+svg('download')+'動画をアップロード</button></div>'
     // タスク3: コーチ発信用SNS投稿文ジェネレーター
     + (function(){
-        var post='今日、ガバショ！で営業を頑張る方へ応援動画を届けました。\n挑戦している人の背中を押せるのは、こちらも力をもらえます。\nあなたの毎日の一歩、ちゃんと見ています。\n\n#ガバショ #営業 #応援 #HORIPRO';
+        var post='今日、ガバショ！で営業を頑張る方へ応援動画を届けました。\n挑戦している人の背中を押せるのは、こちらも力をもらえます。\nあなたの毎日の一歩、ちゃんと見ています。\n\n#ガバショ #営業 #応援 #HORIPRO（仮）';
         return '<div class="card coachpost" style="margin-top:14px">'+secH('share','あなたのSNSで発信しよう')
           + '<p class="muted" style="margin:-6px 0 12px;font-size:12px">動画を送ったあと、あなたのSNSアカウントで投稿すると、フォロワーにもガバショ！が届きます。文面は自由に編集できます。</p>'
           + '<textarea id="coachPostText" rows="6">'+post+'</textarea>'
@@ -2863,7 +2863,7 @@ VIEWS.operator.prompts=function(){
   return pageHead('AIプロンプト管理','各AI機能のプロンプトを管理（運営のみ）。','<button class="btn btn-em btn-sm" data-toast="プロンプトを保存しました（デモ）">保存</button>')
     + pc('A. 日記コメント用','あなたは若手営業マンの成長を支援するAIコーチです。日記・気分・過去の傾向をもとに、優しく前向きで具体的なフィードバックを返してください。医療診断・人格の断定はしない。返す内容：1.共感 2.状態整理 3.良かった点 4.改善 5.明日の具体アクション 6.成長スコア 7.コーチング推奨。')
     + pc('B. パーソナリティ診断用','ユーザーの日記・気分・日報・行動履歴から、自己理解とコーチング支援のための傾向を分析。医療診断・人格障害・発達特性の診断は絶対にしない。出力：営業タイプ/成長タイプ/強み/課題/ストレス時/伸びる環境/上司の接し方/おすすめ行動。')
-    + pc('C. ホリプロ面談ガイド用','担当者が安心して面談できるよう、相手の特徴・褒めるポイント・避けるべき言い方・質問例・応援メッセージを作成。決めつけない／医療診断しない／詰めない。')
+    + pc('C. ホリプロ（仮）面談ガイド用','担当者が安心して面談できるよう、相手の特徴・褒めるポイント・避けるべき言い方・質問例・応援メッセージを作成。決めつけない／医療診断しない／詰めない。')
     + pc('D. お祝い動画台本生成','成果を出した営業マン向けに、明るく華やかな30〜60秒の台本を作成。本人の具体的な努力に触れる。出力：タイトル/冒頭/努力への言及/祝福/次への応援/締め。');
 };
 VIEWS.operator.logic=function(){
@@ -2921,13 +2921,13 @@ async function generatePersonality(){
   return o||mockPersonality();
 }
 
-/* ---- C. ホリプロ面談ガイド ---- */
+/* ---- C. ホリプロ（仮）面談ガイド ---- */
 var BRIEF_SCHEMA={ type:'object', properties:{
   summary:{type:'string'}, personality:{type:'string'},
   praise:{type:'array',items:{type:'string'}}, questions:{type:'array',items:{type:'string'}}, avoid:{type:'array',items:{type:'string'}},
   openingScript:{type:'string'}, closingMessage:{type:'string'}, push:{type:'string'}
 }, required:['summary','personality','praise','questions','avoid','openingScript','closingMessage','push'], additionalProperties:false };
-var BRIEF_SYSTEM='あなたはホリプロ所属の女子アナ・タレントが、若手営業マンを前向きにコーチングするための面談ガイドを作るAIです。担当者が相手を怖がらず安心して面談できるよう、相手の特徴・褒めるポイント・避けるべき言い方・質問例・冒頭の声かけ(openingScript)・最後の応援メッセージ(closingMessage)・背中を押す一言(push)を作成してください。注意：相手を決めつけない。医療的な診断をしない。否定・説教・詰める言葉を避ける。前向きで自然な会話に。必ず指定のJSON形式のみで返答してください。';
+var BRIEF_SYSTEM='あなたはホリプロ（仮）所属の女子アナ・タレントが、若手営業マンを前向きにコーチングするための面談ガイドを作るAIです。担当者が相手を怖がらず安心して面談できるよう、相手の特徴・褒めるポイント・避けるべき言い方・質問例・冒頭の声かけ(openingScript)・最後の応援メッセージ(closingMessage)・背中を押す一言(push)を作成してください。注意：相手を決めつけない。医療的な診断をしない。否定・説教・詰める言葉を避ける。前向きで自然な会話に。必ず指定のJSON形式のみで返答してください。';
 function coachCtx(u){ return 'ユーザー：'+u.name+'（'+u.position+'）\n会社：'+u.company+'\n直近の目標：'+u.goal+'\n参考タイプ：'+u.salesType+'\n気分推移(5段階)：'+u.mood.join(', ')+'\n成長スコア：'+u.score+'\n今の状態：'+u.state; }
 function getBrief(u){ var g=state.coachBriefs[u.id]; if(g) return g;
   var b=aiBrief(u); b.openingScript=u.name+'さん、今日はよろしくお願いします。最近の日記を拝見すると、結果に対してかなり真剣に向き合っているのが伝わってきました。'; b.closingMessage=u.name+'さんの努力は、ちゃんと前に進んでいます。また次回、進捗を聞かせてください。'; return b; }
@@ -2941,11 +2941,11 @@ async function generateBrief(u){
 var VIDEO_SCHEMA={ type:'object', properties:{ title:{type:'string'}, opening:{type:'string'}, effort:{type:'string'}, congrats:{type:'string'}, encourage:{type:'string'}, closing:{type:'string'} }, required:['title','opening','effort','congrats','encourage','closing'], additionalProperties:false };
 var VIDEO_SYSTEM='あなたは成果を出した若手営業マンに向けた、明るく華やかなお祝い動画の台本を作るAIです。本人が見て本気で嬉しくなり、また頑張ろうと思える30〜60秒の台本を作成してください。トーンは明るく・華やか・前向き・少し感動・ド派手なお祝い感。本人の具体的な努力に触れること。出力は title(動画タイトル)/opening(冒頭)/effort(努力への言及)/congrats(達成への祝福)/encourage(次への応援)/closing(締めの一言)。必ず指定のJSON形式のみで返答してください。';
 function mockVideoScript(u){ return { title:u.name+'さん、月間目標達成おめでとう！',
-  opening:u.name+'さん、こんにちは！ホリプロの三上です。今日は、とびきり嬉しいお知らせを聞きました。',
+  opening:u.name+'さん、こんにちは！ホリプロ（仮）の三上です。今日は、とびきり嬉しいお知らせを聞きました。',
   effort:'毎日の振り返りを欠かさず、苦しい時も行動を止めなかった。その積み重ねが、今回の成果につながりましたね。',
   congrats:'月間目標達成、本当におめでとうございます！',
   encourage:'この勢いで、来月もさらに上を目指していきましょう。', closing:'応援しています！' }; }
-function videoCtx(u){ return '対象：'+u.name+'さん\n達成内容：今月の成約3件達成\n成長スコア：'+u.score+'\n会社：'+u.company+'\n動画担当：ホリプロ所属コーチ 三上あかり（明るく華やかなキャラクター）'; }
+function videoCtx(u){ return '対象：'+u.name+'さん\n達成内容：今月の成約3件達成\n成長スコア：'+u.score+'\n会社：'+u.company+'\n動画担当：ホリプロ（仮）所属コーチ 三上あかり（明るく華やかなキャラクター）'; }
 async function generateVideoScript(u){
   var o=await aiCall('video', videoCtx(u), VIDEO_SCHEMA, VIDEO_SYSTEM);
   return o||mockVideoScript(u);
@@ -2974,7 +2974,7 @@ function igCheerCard(coach,title){
   x.fillStyle='rgba(255,255,255,.08)'; x.beginPath(); x.arc(880,300,260,0,7); x.fill(); x.beginPath(); x.arc(180,1640,220,0,7); x.fill();
   x.textAlign='center';
   x.fillStyle='#fff'; x.font='800 104px "Hiragino Kaku Gothic ProN",sans-serif'; x.fillText('ガバショ！',W/2,380);
-  x.font='600 38px "Hiragino Kaku Gothic ProN",sans-serif'; x.fillStyle='rgba(255,255,255,.85)'; x.fillText('HORIPRO × A.B.HAP',W/2,452);
+  x.font='600 38px "Hiragino Kaku Gothic ProN",sans-serif'; x.fillStyle='rgba(255,255,255,.85)'; x.fillText('HORIPRO（仮） × A.B.HAP',W/2,452);
   // 区切り
   x.strokeStyle='rgba(255,255,255,.6)'; x.lineWidth=4; x.beginPath(); x.moveTo(390,560); x.lineTo(690,560); x.stroke();
   x.fillStyle='#fff'; x.font='800 44px "Hiragino Kaku Gothic ProN",sans-serif'; x.fillText('応援動画が届きました', W/2, 760);
@@ -2986,7 +2986,7 @@ function igCheerCard(coach,title){
 }
 // タスク2: 達成シェアカード（ゴールド系モーダル）
 function showAchievementModal(achievement, streak, score){
-  var xtext='「'+achievement+'」を達成しました！\n継続入力 '+streak+'日 ／ 成長スコア '+score+'\nホリプロの伴走で、営業がちょっと楽しくなってきた。\n#ガバショ #営業\n'+appUrl();
+  var xtext='「'+achievement+'」を達成しました！\n継続入力 '+streak+'日 ／ 成長スコア '+score+'\nホリプロ（仮）の伴走で、営業がちょっと楽しくなってきた。\n#ガバショ #営業\n'+appUrl();
   el('modalRoot').innerHTML='<div class="modal-ov" id="achModal"><div class="ach-card">'
     + '<div class="ach-top">'+svg('trophy')+'<span>目標達成！</span></div>'
     + '<div class="ach-body"><div class="ach-main">'+achievement+'</div>'
@@ -3089,7 +3089,7 @@ function showPrompter(){
 }
 function sendVideoToMember(id){
   var m=MEMBERS.filter(function(x){return x.id===id;})[0]; var name=m?m.name:'メンバー';
-  toast(''+name+'さんへのお祝い動画の収録をホリプロへ依頼しました！'); celebrate();
+  toast(''+name+'さんへのお祝い動画の収録をホリプロ（仮）へ依頼しました！'); celebrate();
 }
 
 /* ===================== イベント ===================== */
@@ -3136,7 +3136,7 @@ document.addEventListener('click', function(e){
   if(e.target.closest('#prompterBtn')){ showPrompter(); return; }
   if(e.target.closest('[data-chfilter-reset]')){ CH_FILTER={who:'',type:''}; render(); return; }
   // arrange coaching
-  t=e.target.closest('[data-arrange]'); if(t){ var mm=MEMBERS.filter(function(m){return m.id===t.getAttribute('data-arrange');})[0]; toast('「'+(mm?mm.name:'')+'」さんの面談をホリプロ側コーチへ手配しました（デモ）'); return; }
+  t=e.target.closest('[data-arrange]'); if(t){ var mm=MEMBERS.filter(function(m){return m.id===t.getAttribute('data-arrange');})[0]; toast('「'+(mm?mm.name:'')+'」さんの面談をホリプロ（仮）側コーチへ手配しました（デモ）'); return; }
   // send video (admin/coach)
   t=e.target.closest('[data-sendvideo]'); if(t){ sendVideoToMember(t.getAttribute('data-sendvideo')); return; }
   // upload video (coach)
@@ -3287,7 +3287,7 @@ document.addEventListener('click', function(e){
     if(g && g.current<g.target){ g.current+=1;
       if(g.current>=g.target && !g.done){ g.done=true;
         // 目標達成 → お祝い動画を自動トリガー
-        var nv={id:'vg_'+g.id, reason:g.title+' 達成', title:g.title+' 達成おめでとう！', talent:'ホリプロ公式コーチ', badge:g.title+' 達成バッジ', type:'achievement', status:'unread',
+        var nv={id:'vg_'+g.id, reason:g.title+' 達成', title:g.title+' 達成おめでとう！', talent:'ホリプロ（仮）公式コーチ', badge:g.title+' 達成バッジ', type:'achievement', status:'unread',
           script:ME.name+'さん、「'+g.title+'」の達成、本当におめでとうございます！毎日コツコツ続けてきた成果です。次の目標へ、一緒に進みましょう！'};
         // タスク2: 達成時にシェア用の達成カードを表示（お祝い動画もBOXへ追加）
         MY_VIDEOS.unshift(nv); saveData(); render(); showAchievementModal(g.title+' 達成！', ME.streak, growthScore().total); return;
@@ -3359,7 +3359,7 @@ var CONTACT_URL='https://shintaro1955-bot.github.io/gabasho-lp/contact.html';
 // デモの入口ガイド（3視点で体験）
 function showIntro(){
   el('modalRoot').innerHTML='<div class="modal-ov" id="introModal"><div class="modal-card intro-card">'
-   +'<div class="intro-hero"><div class="ey">HORIPRO × A.B.HAP　ガバショ！</div><h2>3分でわかる、ガバショ！デモ</h2><p>本物のホリプロアナウンサー・現役アスリートが、AIとともに営業を伴走。「感情 × 数字」で、成約・継続・定着を動かします。見たい視点を選んでください。</p></div>'
+   +'<div class="intro-hero"><div class="ey">HORIPRO（仮） × A.B.HAP　ガバショ！</div><h2>3分でわかる、ガバショ！デモ</h2><p>本物のホリプロ（仮）アナウンサー・現役アスリートが、AIとともに営業を伴走。「感情 × 数字」で、成約・継続・定着を動かします。見たい視点を選んでください。</p></div>'
    +'<div class="intro-body"><div class="intro-pick">'
    +'<button data-intro="user"><span class="ii a">'+svg('user')+'</span><span><b>営業マンとして体験する</b><small>日報 → AI応援 → スキル・面談カレンダー…現場の毎日</small></span></button>'
    +'<button data-intro="pitch"><span class="ii b">'+svg('trendUp')+'</span><span><b>経営者として“効果と数字”を見る</b><small>提案サマリー：導入効果・料金・粗利・導入フロー</small></span></button>'
@@ -3367,21 +3367,21 @@ function showIntro(){
    +'</div><p class="muted" style="font-size:10.5px;margin:14px 0 0;text-align:center">いつでも上部タブでロール切替できます。実名・実写は※サンプルです。</p></div></div></div>';
 }
 function showLogin(err){
-  // タスク1: ログイン画面をホリプロアナウンサーのショーケースに
+  // タスク1: ログイン画面をホリプロ（仮）アナウンサーのショーケースに
   var annCards=ANNOUNCERS.map(function(a){
     return '<div class="ann-card"><div class="av">'+personSil()+'</div><div class="role">'+a.role+'</div><div class="nm">'+a.name+'</div><span class="tag">'+a.tag+'</span>'
       + '<div class="msg">「'+a.msg+'」</div><button class="start" data-scrolllogin="1">このコーチで始める →</button></div>';
   }).join('');
-  // タスク6: ホリプロ公式の信頼バッジ
+  // タスク6: ホリプロ（仮）公式の信頼バッジ
   var trust='<div class="trust"><div class="th">安心してご利用いただけます</div><div class="row">'
-    + '<div class="tb">'+svg('award')+'<b>HORIPRO 公式監修</b><small>所属アナウンサーが伴走</small></div>'
+    + '<div class="tb">'+svg('award')+'<b>HORIPRO（仮） 公式監修</b><small>所属アナウンサーが伴走</small></div>'
     + '<div class="tb">'+svg('lock')+'<b>データは安全に保護</b><small>日記は本人のみ閲覧</small></div>'
     + '<div class="tb">'+svg('sparkles')+'<b>実証実験プログラム</b><small>β版を順次アップデート</small></div>'
     + '</div></div>';
   el('modalRoot').innerHTML='<div class="modal-ov login-ov" id="loginModal"><div class="modal-card" style="max-width:760px">'
-    + '<div class="mc-top" style="background:linear-gradient(120deg,var(--em),var(--em-deep));color:#fff">HORIPRO × A.B.HAP ガバショ！</div>'
+    + '<div class="mc-top" style="background:linear-gradient(120deg,var(--em),var(--em-deep));color:#fff">HORIPRO（仮） × A.B.HAP ガバショ！</div>'
     + '<div class="mc-body">'
-      + '<div class="lp-hero"><div class="ey">HORIPRO × A.B.HAP</div><h3>本物のホリプロアナウンサーが、<br>あなたの営業に伴走する。</h3><p>毎日の振り返りに、プロの言葉で応援が届く。続けるほど成長が見える、新しいAIコーチング体験。</p></div>'
+      + '<div class="lp-hero"><div class="ey">HORIPRO（仮） × A.B.HAP</div><h3>本物のホリプロ（仮）アナウンサーが、<br>あなたの営業に伴走する。</h3><p>毎日の振り返りに、プロの言葉で応援が届く。続けるほど成長が見える、新しいAIコーチング体験。</p></div>'
       + '<div class="ann-grid">'+annCards+'</div>'
       + '<form id="loginForm">'
       + '<div class="field"><label>ID</label><input id="loginEmail" type="text" autocomplete="username" autocapitalize="off" placeholder="test" value="test"></div>'
